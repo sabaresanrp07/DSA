@@ -1,0 +1,5 @@
+# Executable files
+*.exe
+
+# Code Runner temporary files
+tempCodeRunnerFile*
