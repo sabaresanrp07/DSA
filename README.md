@@ -1,3 +1,3 @@
 # Data Structures and Algorithms
 
-My notes and practice for C/C++ and DSA.
+My notes and practice code for DSA.
