@@ -1,5 +1,26 @@
 // Data structures
 
+/*
+
+    Arrays
+      |
+    Linked Lists
+      |
+    Stack
+      |
+    Queue
+      |
+    Hash Table
+      |
+    Trees
+      |
+    Heap
+      |
+    Graphs
+
+*/
+
+
 /*arrangement of collection of data iteams 
 so they can use efficently for operations 
 
@@ -87,11 +108,106 @@ ADT - Abstract data type (What the data structure does, not how it does it(it hi
 */
 //________________________________________________________________________________________________________________________
 
+// Algorithms
+
+
+/*
+1. Searching
+   ├── Linear Search
+   ├── Binary Search
+   └── Ternary Search
+
+2. Sorting
+   ├── Bubble Sort
+   ├── Selection Sort
+   ├── Insertion Sort
+   ├── Merge Sort
+   ├── Quick Sort
+   ├── Heap Sort
+   ├── Counting Sort
+   ├── Radix Sort
+   └── Bucket Sort
+
+3. Problem solving Patterns (Array/String)
+   ├── Two Pointers
+   ├── Sliding Window
+   ├── Prefix Sum
+   ├── Difference Array
+   ├── Kadane's Algorithm
+   └── Hashing
+
+4. Problem solving Patterns (Linked List)
+   ├── Fast & Slow Pointers
+   ├── Reversal
+   ├── Merge Lists
+   └── Cycle Detection
+
+5. Recursion
+   ├── Basic Recursion
+   ├── Divide & Conquer
+   └── Backtracking
+
+6. Stack / Queue
+   ├── Monotonic Stack
+   ├── Monotonic Queue
+   └── BFS
+
+7. Trees
+   ├── DFS
+   ├── BFS
+   ├── Tree Traversals
+   ├── Binary Search Tree
+   ├── Heap
+   └── Trie
+
+8. Greedy
+   ├── Activity Selection
+   ├── Interval Problems
+   ├── Fractional Knapsack
+   └── Huffman Coding
+
+9. Graphs
+   ├── BFS
+   ├── DFS
+   ├── Topological Sort
+   ├── Union-Find / DSU
+   ├── Dijkstra
+   ├── Bellman-Ford
+   ├── Floyd-Warshall
+   ├── Kruskal
+   └── Prim
+
+10. Dynamic Programming
+    ├── 1D DP
+    ├── 2D DP
+    ├── Knapsack
+    ├── Subsequence DP
+    ├── Grid DP
+    ├── Interval DP
+    ├── Tree DP
+    └── Bitmask DP
+
+11. Advanced
+    ├── Bit Manipulation
+    ├── Bitmasking
+    ├── Segment Tree
+    ├── Fenwick Tree
+    ├── Sparse Table
+    ├── KMP
+    ├── Rabin-Karp
+    ├── Z Algorithm
+    └── Advanced Graph Algorithms
+*/
+
+
+//________________________________________________________________________________________________________________________
+
 #include <iostream>
 #include <stdio.h>
 #include <thread>
 #include <chrono>
 #include <unordered_set>
+#include <climits>
 
 //Tree R
 
@@ -1185,7 +1301,7 @@ returning time of the recursion*/
 
 // Strings
 
-int main(){
+// int main(){
 
     // ASCII values
 
@@ -1203,5 +1319,211 @@ int main(){
 
     //
 
+// }
+
+//________________________________________________________________________________________________________________________
+
+// linked list 
+
+//first/head  a pointer in stack point to a node in heap where a node contain a value and pointer to another node
+
+// ┌─────────────┬─────────────────┐
+// │    value    │ pointer (next)  │
+// └─────────────┴─────────────────┘
+
+// linked list are not contiguous
+
+// ListNode* next
+//    ↑       ↑
+//   type    pointer variable (pointer is Node type)
+
+//linked list can be of any datatype 
+
+//  ___________________
+// |                   |
+// |struct ListNode {  |
+// |    int val;       |   // 4 bytes 
+// |    ListNode* next;|   // pointer takes 8 bytes
+// |};                 |
+// |___________________|
+
+
+// we use struct because a linked-list node needs to hold multiple pieces of related information together
+// we can also use class instead of struct 
+
+/* this is a 'Self-referential structures' self-referential structure is a structure that contains a
+ pointer that can point to another object of the same structure type.
+*/
+
+using namespace std;
+
+class Node {
+
+public:
+    int data;
+    Node* next;
+};
+
+void Display(Node *p){
+
+    // display the val with address
+
+    if (p!=NULL){
+        printf("|%d|%p|\n",p->data,p);
+        printf("       |        \n");
+        printf("       V        \n");
+        Display(p->next);
+    }
+    else{
+        printf("      NULL       \n");
+    }
 }
+
+
+// Count (Size) also we can count while sum so it's upto u
+
+int Count(Node *p){
+
+    int count = 0;
+
+    while(p!= nullptr){
+        count++;
+        p = p->next;
+    }
+
+    return count;
+}
+
+// Sum of all the elements 
+
+int Sum(Node* p){
+
+    int sum = 0;
+    while(p!=nullptr){
+        sum+=p->data;
+        p = p->next;
+    }
+
+    return sum;
+}
+
+// MAX
+
+int Max_num(Node* p){
+
+    
+    int n = Count(p);
+    int max = p->data;
+    
+    for (int i = 1;i<n;i++){
+        p = p->next;
+        if (p->data > max){
+            max = p->data;
+        }
+    }
+
+    return max;
+}
+
+// Second max
+
+int Sec_max(Node* p){
+
+    int sec_max = INT_MIN;
+    int maxx = Max_num(p);
+
+    int n = Count(p);
+
+    for (int i = 0;i<n;i++){
+        if (p->data < maxx && p->data > sec_max){
+            sec_max = p->data;
+        }
+        p = p->next;
+    }
+
+    return sec_max;
+}
+
+// Min 
+
+int Min_num(Node* p){
+
+    int min = p->data;
+    int n = Count(p);
+
+    for (int i =1;i<n;i++){
+        p=p->next;
+        if(p->data <min){
+            min = p->data;
+        }
+    }
+
+    return min;
+
+}
+
+int main(){
+
+    int n;
+    cout<<"Enter size of ur array: ";
+    cin>>n;
+
+    int A[n];
+    cout<<"Enter elements of ur array: ";
+    for (int i =0;i<n;i++){
+        cin>>A[i];
+    }
+
+    // Create first node
+    Node* head = new Node;
+
+    Node* temp;
+    Node* last;
+
+    head->data = A[0];
+    head->next = nullptr;
+
+    last = head;
+
+    // Create remaining nodes
+    for (int i = 1; i < sizeof(A) / sizeof(A[0]); i++) {
+
+        temp = new Node;
+
+        temp->data = A[i];
+        temp->next = nullptr;
+
+        last->next = temp;
+        last = temp;
+    }
+
+    // Display linked list
+
+    // Node* p = head;
+    // while (p != nullptr) {
+    //     cout << p->data << " -> ";
+    //     p = p->next;
+    // }
+    // cout << "NULL";
+
+    // Display(head);
+
+    // cout <<"Size of your linked list :"<<Count(head)<<endl;
+    // cout<<"Sum of all elements is :"<<Sum(head)<<endl;
+    // cout<<"Max num is :"<<Max_num(head)<<endl;
+    // cout << "Second MAx is :"<<Sec_max(head)<<endl;
+    // cout <<"Min value is :"<<Min_num(head);
+
+    return 0;
+}
+
+//________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
 
