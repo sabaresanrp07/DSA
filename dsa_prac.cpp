@@ -1309,7 +1309,7 @@ returning time of the recursion*/
     // printf("%c",65);
 
 
-    // char & string
+    // char and string
 
     // char a[10] = {'a','b','c','d'};
     // printf("%s\n",a); // only array of char allow to print an array
@@ -1347,6 +1347,9 @@ returning time of the recursion*/
 // |};                 |
 // |___________________|
 
+// struct Node *p;  }
+//                  }   both are same   
+// Node *p;         }
 
 // we use struct because a linked-list node needs to hold multiple pieces of related information together
 // we can also use class instead of struct 
@@ -1357,119 +1360,25 @@ returning time of the recursion*/
 
 using namespace std;
 
+
 class Node {
 
 public:
     int data;
     Node* next;
+
 };
 
-void Display(Node *p){
 
-    // display the val with address
-
-    if (p!=NULL){
-        printf("|%d|%p|\n",p->data,p);
-        printf("       |        \n");
-        printf("       V        \n");
-        Display(p->next);
-    }
-    else{
-        printf("      NULL       \n");
-    }
-}
-
-
-// Count (Size) also we can count while sum so it's upto u
-
-int Count(Node *p){
-
-    int count = 0;
-
-    while(p!= nullptr){
-        count++;
-        p = p->next;
-    }
-
-    return count;
-}
-
-// Sum of all the elements 
-
-int Sum(Node* p){
-
-    int sum = 0;
-    while(p!=nullptr){
-        sum+=p->data;
-        p = p->next;
-    }
-
-    return sum;
-}
-
-// MAX
-
-int Max_num(Node* p){
-
-    
-    int n = Count(p);
-    int max = p->data;
-    
-    for (int i = 1;i<n;i++){
-        p = p->next;
-        if (p->data > max){
-            max = p->data;
-        }
-    }
-
-    return max;
-}
-
-// Second max
-
-int Sec_max(Node* p){
-
-    int sec_max = INT_MIN;
-    int maxx = Max_num(p);
-
-    int n = Count(p);
-
-    for (int i = 0;i<n;i++){
-        if (p->data < maxx && p->data > sec_max){
-            sec_max = p->data;
-        }
-        p = p->next;
-    }
-
-    return sec_max;
-}
-
-// Min 
-
-int Min_num(Node* p){
-
-    int min = p->data;
-    int n = Count(p);
-
-    for (int i =1;i<n;i++){
-        p=p->next;
-        if(p->data <min){
-            min = p->data;
-        }
-    }
-
-    return min;
-
-}
-
-int main(){
+// Creating Linked List
+Node* Create_LL(){
 
     int n;
-    cout<<"Enter size of ur array: ";
+    cout<<"Enter no:of elements :";
     cin>>n;
 
     int A[n];
-    cout<<"Enter elements of ur array: ";
+    cout<<"Enter elements :";
     for (int i =0;i<n;i++){
         cin>>A[i];
     }
@@ -1497,7 +1406,15 @@ int main(){
         last = temp;
     }
 
-    // Display linked list
+    return head;
+}
+
+
+
+// Displaying Linked List 
+void Display(Node *p){
+
+    // Display linked list val without address
 
     // Node* p = head;
     // while (p != nullptr) {
@@ -1506,19 +1423,285 @@ int main(){
     // }
     // cout << "NULL";
 
+
+    // display the val with address
+
+    if (p!=NULL){
+        printf("|%d|%p|\n",p->data,p);
+        printf("       |        \n");
+        printf("       V        \n");
+        Display(p->next);
+    }
+    else{
+        printf("       NULL        \n");
+    }
+}
+
+
+// Count (Size) also we can count while sum but Sum is a method i can't do it eveytime(logically)
+int Count(Node *p){
+
+    int count = 0;
+
+    while(p!= nullptr){
+        count++;
+        p = p->next;
+    }
+
+    return count;
+}
+
+
+
+// Sum of all the elements 
+int Sum(Node* p){
+
+    int sum = 0;
+    while(p!=nullptr){
+        sum+=p->data;
+        p = p->next;
+    }
+
+    return sum;
+}
+
+
+// MAX
+int Max_num(Node* p){
+
+    
+    int n = Count(p);
+    int max = p->data;
+    
+    for (int i = 1;i<n;i++){
+        p = p->next;
+        if (p->data > max){
+            max = p->data;
+        }
+    }
+
+    return max;
+}
+
+
+// Second max
+int Sec_max(Node* p){
+
+    int sec_max = INT_MIN;
+    int maxx = Max_num(p);
+
+    int n = Count(p);
+
+    for (int i = 0;i<n;i++){
+        if (p->data < maxx && p->data > sec_max){
+            sec_max = p->data;
+        }
+        p = p->next;
+    }
+
+
+    return sec_max;
+}
+
+
+// Min 
+int Min_num(Node* p){
+
+    int min = p->data;
+    int n = Count(p);
+
+    for (int i =1;i<n;i++){
+        p=p->next;
+        if(p->data <min){
+            min = p->data;
+        }
+    }
+
+    return min;
+
+}
+
+
+// Search element in LL (linaer search)
+int Search(Node* p){
+
+    int Target;
+    cout<<"Enter a element to find :";
+    cin>>Target;
+
+    int n = Count(p);
+
+    // linear search
+
+    for (int i = 0;i<n;i++){
+        if (p->data == Target){
+            return i;
+        }
+
+        p = p->next;
+    }
+
+    return -1;
+
+}
+
+// Improvement in linear search
+
+// Move to Head
+// Transposition
+
+
+// Insertion in LL
+void Insert_ele(Node* p){
+
+    int i,e;
+    cout << "Enter element  to insert :";
+    cin>>e;
+    cout << "Enter index :";
+    cin>>i;
+
+    if (i > 0 && i >Count(p)){
+        cout << "Invalid index";
+        return;       
+    }
+
+    Node* dummy = new Node;
+    dummy->data = 0;
+    dummy->next = p;
+
+    p = dummy;
+
+    Node* t = new Node;
+    t->data = e;
+    t->next = nullptr;
+
+
+    for (int j =0;j<i;j++){
+        p = p->next;
+    }
+
+    t->next = p->next;// see p->next doesn't mean p = p->next 
+    p->next = t;    // p and p->next are two different things
+
+    Display(dummy->next);
+}
+
+
+// Insert in sorted LL
+
+void InsertSort(Node *p){
+
+    int e;
+    cout << "Enter element  to insert :";
+    cin>>e;
+
+    Node* dummy = new Node;
+    dummy->data = INT_MIN;
+    dummy->next = p;
+
+    p = dummy;
+
+    Node* t = new Node;
+    t->data = e;
+    t->next = nullptr;
+
+
+    while(p->next != nullptr && p->next->data <e){
+        p = p->next;
+    }
+
+    t->next = p->next;
+    p->next= t;
+
+    Display(dummy->next);
+}
+
+
+// Deleting element from LL
+
+void Delete_ele(Node *p){
+
+    int e;
+    cout << "Which element you want to delete :";
+    cin >> e;
+
+    Node *t = new Node;
+    t->data = 0;
+    t->next = p;
+    p = t;
+
+    while (1){
+        if (p->next == nullptr){
+            cout << "404! element is not found";
+            return;
+        }
+        if (p->next->data != e){
+            p=p->next;
+        }
+        else{
+            p->next = p->next->next;
+            Display(t->next);
+            printf("Element Deleted successfully \n");
+            return;
+        }
+    }    
+}
+
+void Check_sorted(Node *p){
+
+    int Sorted = 1;
+
+    while(Sorted && p->next != nullptr){
+        if(p->data < p->next->data){
+            p = p->next;
+        }
+        else{
+            cout<< "This is not a Sorted LL!\n";
+            return;
+        }
+    }
+
+    cout << "This is a Sorted LL!\n";
+
+}
+
+void Remove_dup(Node *p){
+
+
+}
+
+
+int main(){
+
+    Node* head = Create_LL();
+
     // Display(head);
-
+    
     // cout <<"Size of your linked list :"<<Count(head)<<endl;
+    
     // cout<<"Sum of all elements is :"<<Sum(head)<<endl;
+    
     // cout<<"Max num is :"<<Max_num(head)<<endl;
-    // cout << "Second MAx is :"<<Sec_max(head)<<endl;
+    
+    // cout << "Second Max is :"<<Sec_max(head)<<endl;
+    
     // cout <<"Min value is :"<<Min_num(head);
+    
+    // cout << Search(head);
+    
+    // Insert_ele(head);
+    
+    // InsertSort(head);
 
-    return 0;
+    // Delete_ele(head);
+
+    // Check_sorted(head);
+
+    Remove_dup(head);
+
 }
 
 //________________________________________________________________________________________________________________________
-
 
 
 
