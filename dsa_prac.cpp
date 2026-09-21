@@ -200,6 +200,12 @@ ADT - Abstract data type (What the data structure does, not how it does it(it hi
 */
 
 
+// O     → Upper bound (Worst case)
+
+// Θ     → Tight bound (Exact Time or space complexity of the program) Ω(n) ≤ growth ≤ O(n)
+
+// Ω     → Lower bound (Best case)
+
 //________________________________________________________________________________________________________________________
 
 #include <iostream>
@@ -501,6 +507,113 @@ returning time of the recursion*/
 // }
 
 //________________________________________________________________________________________________________________________
+
+// Bubble Sort (sort an array by comparing nearby value)
+
+// int main(){
+
+//     int n;
+//     std::cout << "Enter the space of array u want to create :";
+//     std::cin>>n;
+
+//     int arr[n];
+//     std::cout << "Enter the elements :";
+//     for (int i = 0;i<n;i++){
+//         std::cin >> arr[i];
+//     }
+
+//     for (int i = 0; i < n - 1; i++) {
+//         for (int j = 0; j < n - i - 1; j++) {
+
+//             if (arr[j] > arr[j + 1]) {
+//                 int temp = arr[j];
+//                 arr[j] = arr[j + 1];
+//                 arr[j + 1] = temp;
+//             }
+//         }
+//     }
+
+//     for (int i = 0;i<n;i++){
+//         std::cout << arr[i] << " ";
+//     }
+
+// }
+
+
+//_________________________________________________________________________________________________________________________
+// Selection sort  (What's the smallest element in the remaining array? Put it here)
+
+// int main(){
+
+//     int n;
+//     std::cout << "Enter the space of array u want to create :";
+//     std::cin>>n;
+
+//     int arr[n];
+//     std::cout << "Enter the elements :";
+//     for (int i = 0;i<n;i++){
+//         std::cin >> arr[i];
+//     }
+
+//     int temp;
+//     int s;
+
+//     for (int i = 0; i < n - 1; i++){
+//         s = i;
+    
+//         for (int j = i + 1; j < n; j++)
+//         {
+//             if (arr[j] < arr[s])
+//             {
+//                 s = j;
+//             }
+//         }
+
+//         temp = arr[i];
+//         arr[i] = arr[s];
+//         arr[s] = temp;
+//     }
+
+
+//     for (int i = 0;i<n;i++){ 
+//         std::cout << arr[i]<<" ";
+//     }
+
+// }
+ 
+//_________________________________________________________________________________________________________________________
+// Insertion sorting (Take the next element and insert it into the correct position in the already-sorted portion)
+
+// int main(){
+
+//     int n;
+//     std::cout << "Enter the space of array u want to create :";
+//     std::cin>>n;
+
+//     int arr[n];
+//     std::cout << "Enter the elements :";
+//     for (int i = 0;i<n;i++){
+//         std::cin >> arr[i];
+//     }
+
+//     for (int i = 1; i < n; i++) {
+//         int key = arr[i];
+//         int j = i - 1;
+
+//         while (j >= 0 && arr[j] > key) {
+//             arr[j + 1] = arr[j];
+//             j--;
+//         }
+
+//         arr[j + 1] = key;
+//     }
+
+//     for (int i = 0;i<n;i++){
+//         std::cout << arr[i] << " ";
+//     }
+
+// }
+//_________________________________________________________________________________________________________________________
 
 // Tower of hanoi
 
@@ -1647,7 +1760,7 @@ void Delete_ele(Node *p){
     }    
 }
 
-void Check_sorted(Node *p){
+int Check_sorted(Node *p){
 
     int Sorted = 1;
 
@@ -1656,17 +1769,150 @@ void Check_sorted(Node *p){
             p = p->next;
         }
         else{
-            cout<< "This is not a Sorted LL!\n";
-            return;
+            cout<<"please enter sorted elements\n";
+            
+            return 0;
         }
     }
 
-    cout << "This is a Sorted LL!\n";
+    cout<< "This is a Sorted LL!\n";
+    return 1;
 
 }
 
+
 void Remove_dup(Node *p){
 
+    unordered_set<int> seen; // Using set for set operator like find
+
+    Node* q = p;
+    Node* prev = nullptr;
+
+    while (q != nullptr)
+    {
+        if (seen.find(q->data) != seen.end()) // if element is not found find() return seen.end()
+        {
+            // duplicate found
+            prev->next = q->next;
+            delete q;
+            q = prev->next;
+        }
+        else
+        {
+            seen.insert(q->data);
+            prev = q;
+            q = q->next;
+        }
+    }
+
+    Display(p);
+}
+
+
+
+// Reversing Linked List
+void Reverse(Node *p){
+
+    Node* q = nullptr;
+    Node* r = nullptr;
+
+    while (p != nullptr)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+
+
+    Display(q);
+    
+}
+
+
+// Concatentation of LL 
+void Concat(Node *p){
+
+    Node *r = p;
+
+    cout<<"\nEnter info of ur second LL\n";
+    Node *q = Create_LL();
+
+    while(p->next != nullptr){
+        p = p->next;
+    }
+
+    p->next = q;
+
+    Display(r);
+
+
+}
+
+
+// Merge Linked List
+void Merge(Node *p){
+
+    if(!Check_sorted(p)){
+        return;
+    }
+
+    Node *r = p;
+
+    cout<<"\nEnter info of ur second LL\n";
+    Node *q = Create_LL();
+
+    if (!Check_sorted(q)){
+        return;
+    }
+
+
+    int i = Count(p),j = Count(q),x=0,y=0;
+
+    while(x<i && y<j){
+
+        if (p->next==nullptr){
+            break;
+        }
+
+        if(p->data<q->data  && p->next->data > q->data){
+
+            Node *temp = new Node;
+            temp->data = q->data;
+
+            temp->next = p->next;
+
+            p->next = temp;
+            p=p->next->next;
+            q = q->next;
+            y++;
+            x++;
+        }
+        else if (p->data>q->data){
+            Node *temp = new Node;
+            temp->data = p->data; 
+            temp->next = p->next;
+            p->data = q->data;
+            p->next = temp;
+
+            p=p->next;
+            q=q->next;
+            y++;
+            x++;
+        }
+        else{
+            p = p->next;
+            x++;
+
+        }
+    }
+
+    if (y<j){
+        p->next = q;
+    }
+
+
+    Display(r);
 
 }
 
@@ -1697,16 +1943,14 @@ int main(){
 
     // Check_sorted(head);
 
-    Remove_dup(head);
+    // Remove_dup(head);
+
+    // Reverse(head);
+
+    // Concat(head); // Concatenation is just adding the second LL to first no need to check order
+
+    Merge(head);
 
 }
 
 //________________________________________________________________________________________________________________________
-
-
-
-
-
-
-
-
