@@ -214,6 +214,7 @@ ADT - Abstract data type (What the data structure does, not how it does it(it hi
 #include <chrono>
 #include <unordered_set>
 #include <climits>
+# include <stack>
 
 //Tree R
 
@@ -613,13 +614,14 @@ returning time of the recursion*/
 //     }
 
 // }
+
 //_________________________________________________________________________________________________________________________
 
 // Tower of hanoi
 
 // using namespace std;
 
-// void TOH(int n, int A, int B, int C) { // n-> no:of disk , A-> source , B->help tower , c-> destination
+// void TOH(int n, int A, int B, int C) { // n = no:of disk , A = source , B = help tower , c = destination
 
 //     if (n > 0) {
 
@@ -644,6 +646,36 @@ returning time of the recursion*/
 //     cin >> n;
 
 //     TOH(n, 1, 2, 3);
+
+//     return 0;
+// }
+
+//________________________________________________________________________________________________________________________
+
+// Different parameters and their behaviour 
+
+using namespace std;
+
+void change1(int arr[]) { 
+    arr[0] = 100;
+}
+
+void change2(int *arr) {
+    arr[1] = 200;
+}
+
+// int arr[] , int *arr (both are treated)
+
+// int main() {
+
+//     int arr[3] = {10, 20, 30};
+
+//     change1(arr);
+//     change2(arr);
+
+//     cout << arr[0] << " ";
+//     cout << arr[1] << " ";
+//     cout << arr[2];
 
 //     return 0;
 // }
@@ -1471,486 +1503,1097 @@ returning time of the recursion*/
  pointer that can point to another object of the same structure type.
 */
 
-using namespace std;
+// using namespace std;
+
+// class Node {
+
+// public:
+//     int data;
+//     Node* next;
+
+// };
 
 
-class Node {
+// // Creating Linked List
+// Node* Create_LL(){
 
-public:
-    int data;
-    Node* next;
+//     int n;
+//     cout<<"Enter no:of elements :";
+//     cin>>n;
 
+//     int A[n];
+//     cout<<"Enter elements :";
+//     for (int i =0;i<n;i++){
+//         cin>>A[i];
+//     }
+
+//     // Create first node
+//     Node* head = new Node;
+
+//     Node* temp;
+//     Node* last;
+
+//     head->data = A[0];
+//     head->next = nullptr;
+
+//     last = head;
+
+//     // Create remaining nodes
+//     for (int i = 1; i < sizeof(A) / sizeof(A[0]); i++) {
+
+//         temp = new Node;
+
+//         temp->data = A[i];
+//         temp->next = nullptr;
+
+//         last->next = temp;
+//         last = temp;
+//     }
+
+//     return head;
+// }
+
+
+
+// // Displaying Linked List 
+// void Display(Node *p){
+
+//     // Display linked list val without address
+
+//     // Node* p = head;
+//     // while (p != nullptr) {
+//     //     cout << p->data << " -> ";
+//     //     p = p->next;
+//     // }
+//     // cout << "NULL";
+
+
+//     // display the val with address
+
+//     if (p!=NULL){
+//         printf("|%d|%p|\n",p->data,p);
+//         printf("       |        \n");
+//         printf("       V        \n");
+//         Display(p->next);
+//     }
+//     else{
+//         printf("       NULL        \n");
+//     }
+// }
+
+
+// // Count (Size) also we can count while sum but Sum is a method i can't do it eveytime(logically)
+// int Count(Node *p){
+
+//     int count = 0;
+
+//     while(p!= nullptr){
+//         count++;
+//         p = p->next;
+//     }
+
+//     return count;
+// }
+
+
+
+// // Sum of all the elements 
+// int Sum(Node* p){
+
+//     int sum = 0;
+//     while(p!=nullptr){
+//         sum+=p->data;
+//         p = p->next;
+//     }
+
+//     return sum;
+// }
+
+
+// // MAX
+// int Max_num(Node* p){
+
+    
+//     int n = Count(p);
+//     int max = p->data;
+    
+//     for (int i = 1;i<n;i++){
+//         p = p->next;
+//         if (p->data > max){
+//             max = p->data;
+//         }
+//     }
+
+//     return max;
+// }
+
+
+// // Second max
+// int Sec_max(Node* p){
+
+//     int sec_max = INT_MIN;
+//     int maxx = Max_num(p);
+
+//     int n = Count(p);
+
+//     for (int i = 0;i<n;i++){
+//         if (p->data < maxx && p->data > sec_max){
+//             sec_max = p->data;
+//         }
+//         p = p->next;
+//     }
+
+
+//     return sec_max;
+// }
+
+
+// // Min 
+// int Min_num(Node* p){
+
+//     int min = p->data;
+//     int n = Count(p);
+
+//     for (int i =1;i<n;i++){
+//         p=p->next;
+//         if(p->data <min){
+//             min = p->data;
+//         }
+//     }
+
+//     return min;
+
+// }
+
+
+// // Search element in LL (linaer search)
+// int Search(Node* p){
+
+//     int Target;
+//     cout<<"Enter a element to find :";
+//     cin>>Target;
+
+//     int n = Count(p);
+
+//     // linear search
+
+//     for (int i = 0;i<n;i++){
+//         if (p->data == Target){
+//             return i;
+//         }
+
+//         p = p->next;
+//     }
+
+//     return -1;
+
+// }
+
+// // Improvement in linear search
+
+// // Move to Head
+// // Transposition
+
+
+// // Insertion in LL
+// void Insert_ele(Node* p){
+
+//     int i,e;
+//     cout << "Enter element  to insert :";
+//     cin>>e;
+//     cout << "Enter index :";
+//     cin>>i;
+
+//     if (i > 0 && i >Count(p)){
+//         cout << "Invalid index";
+//         return;       
+//     }
+
+//     Node* dummy = new Node;
+//     dummy->data = 0;
+//     dummy->next = p;
+
+//     p = dummy;
+
+//     Node* t = new Node;
+//     t->data = e;
+//     t->next = nullptr;
+
+
+//     for (int j =0;j<i;j++){
+//         p = p->next;
+//     }
+
+//     t->next = p->next;// see p->next doesn't mean p = p->next 
+//     p->next = t;    // p and p->next are two different things
+
+//     Display(dummy->next);
+// }
+
+
+// // Insert in sorted LL
+
+// void InsertSort(Node *p){
+
+//     int e;
+//     cout << "Enter element  to insert :";
+//     cin>>e;
+
+//     Node* dummy = new Node;
+//     dummy->data = INT_MIN;
+//     dummy->next = p;
+
+//     p = dummy;
+
+//     Node* t = new Node;
+//     t->data = e;
+//     t->next = nullptr;
+
+
+//     while(p->next != nullptr && p->next->data <e){
+//         p = p->next;
+//     }
+
+//     t->next = p->next;
+//     p->next= t; 
+
+//     Display(dummy->next);
+    
+// }
+
+
+// // Deleting element from LL
+
+// void Delete_ele(Node *p){
+
+//     int e;
+//     cout << "Which element you want to delete :";
+//     cin >> e;
+
+//     Node *t = new Node;
+//     t->data = 0;
+//     t->next = p;
+//     p = t;
+
+//     while (1){
+//         if (p->next == nullptr){
+//             cout << "404! element is not found";
+//             return;
+//         }
+//         if (p->next->data != e){
+//             p=p->next;
+//         }
+//         else{
+//             p->next = p->next->next;
+//             Display(t->next);
+//             printf("Element Deleted successfully \n");
+//             return;
+//         }
+//     }    
+// }
+
+// int Check_sorted(Node *p){
+
+//     int Sorted = 1;
+
+//     while(Sorted && p->next != nullptr){
+//         if(p->data < p->next->data){
+//             p = p->next;
+//         }
+//         else{
+//             cout<<"please enter sorted elements\n";
+            
+//             return 0;
+//         }
+//     }
+
+//     cout<< "This is a Sorted LL!\n";
+//     return 1;
+
+// }
+
+
+// void Remove_dup(Node *p){
+
+//     unordered_set<int> seen; // Using set for set operator like find
+
+//     Node* q = p;
+//     Node* prev = nullptr;
+
+//     while (q != nullptr)
+//     {
+//         if (seen.find(q->data) != seen.end()) // if element is not found find() return seen.end()
+//         {
+//             // duplicate found
+//             prev->next = q->next;
+//             delete q;
+//             q = prev->next;
+//         }
+//         else
+//         {
+//             seen.insert(q->data);
+//             prev = q;
+//             q = q->next;
+//         }
+//     }
+
+//     Display(p);
+// }
+
+
+
+// // Reversing Linked List
+// void Reverse(Node *p){
+
+//     Node* q = nullptr;
+//     Node* r = nullptr;
+
+//     while (p != nullptr)
+//     {
+//         r = q;
+//         q = p;
+//         p = p->next;
+//         q->next = r;
+//     }
+
+//     Display(q);
+
+    
+// }
+
+
+// // Concatentation of LL 
+// void Concat(Node *p){
+
+//     Node *r = p;
+
+//     cout<<"\nEnter info of ur second LL\n";
+//     Node *q = Create_LL();
+
+//     while(p->next != nullptr){
+//         p = p->next;
+//     }
+
+//     p->next = q;
+
+//     Display(r);
+
+
+// }
+
+
+// // Merge Linked List
+// void Merge(Node *p){
+
+//     if(!Check_sorted(p)){
+//         return;
+//     }
+
+//     Node *r = p;
+
+//     cout<<"\nEnter info of ur second LL\n";
+//     Node *q = Create_LL();
+
+//     if (!Check_sorted(q)){
+//         return;
+//     }
+
+
+//     int i = Count(p),j = Count(q),x=0,y=0;
+
+//     while(x<i && y<j){
+
+//         if (p->next==nullptr){
+//             break;
+//         }
+
+//         if(p->data<q->data  && p->next->data > q->data){
+
+//             Node *temp = new Node;
+//             temp->data = q->data;
+
+//             temp->next = p->next;
+
+//             p->next = temp;
+//             p=p->next->next;
+//             q = q->next;
+//             y++;
+//             x++;
+//         }
+//         else if (p->data>q->data){
+//             Node *temp = new Node;
+//             temp->data = p->data; 
+//             temp->next = p->next;
+//             p->data = q->data;
+//             p->next = temp;
+
+//             p=p->next;
+//             q=q->next;
+//             y++;
+//             x++;
+//         }
+//         else{
+//             p = p->next;
+//             x++;
+
+//         }
+//     }
+
+//     if (y<j){
+//         p->next = q;
+//     }
+
+
+//     Display(r);
+
+// }
+
+
+// int main(){
+
+//     Node* head = Create_LL();
+
+//     Display(head);
+    
+//     cout <<"Size of your linked list :"<<Count(head)<<endl;
+    
+//     cout<<"Sum of all elements is :"<<Sum(head)<<endl;
+    
+//     cout<<"Max num is :"<<Max_num(head)<<endl;
+    
+//     cout << "Second Max is :"<<Sec_max(head)<<endl;
+    
+//     cout <<"Min value is :"<<Min_num(head);
+    
+//     cout << Search(head);
+    
+//     Insert_ele(head);
+    
+//     InsertSort(head);
+
+//     Delete_ele(head);
+
+//     Check_sorted(head);
+
+//     Remove_dup(head);
+
+//     Reverse(head);
+
+//     Concat(head); // Concatenation is just adding the second LL to first no need to check order
+
+//     Merge(head);
+
+// }
+
+//________________________________________________________________________________________________________________________
+
+// Double pointer **Node
+
+// using namespace std;
+
+// class Node {
+// public:
+//     int data;
+//     Node* next;
+// };
+
+// void insertBeginning(Node** head, int value) {
+//     Node* newNode = new Node;
+//     newNode->data = value;
+//     newNode->next = *head;
+//     *head = newNode;
+// }
+
+// void insertEnd(Node** head, int value) {
+//     Node* newNode = new Node;
+//     newNode->data = value;
+//     newNode->next = nullptr;
+
+//     if (*head == nullptr) {
+//         *head = newNode;
+//         return;
+//     }
+
+//     Node* temp = *head;
+//     while (temp->next != nullptr) {
+//         temp = temp->next;
+//     }
+//     temp->next = newNode;
+// }
+
+// void deleteBeginning(Node** head) {
+
+//     if (*head == nullptr)
+//         return;
+
+//     Node* temp = *head;
+
+//     *head = (*head)->next;
+
+//     delete temp;
+// }
+
+// void deleteEnd(Node** head)
+// {
+//     Node* temp = *head;
+
+//     if (*head == nullptr)
+//         return;
+
+//     if ((*head)->next == nullptr)
+//     {
+//         delete *head;
+//         *head = nullptr;
+//         return;
+//     }
+
+//     while (temp->next->next != nullptr)
+//         temp = temp->next;
+
+//     delete temp->next;
+//     temp->next = nullptr;
+// }
+
+// void display(Node* head) {
+
+//     Node* temp = head;
+
+//     while (temp != nullptr) {
+//         cout << temp->data << " ";
+//         temp = temp->next;
+//     }
+
+//     cout << endl;
+// }
+
+// int main() {
+
+//     Node* head = nullptr;
+
+//     insertEnd(&head, 10);
+//     insertEnd(&head, 20);
+//     insertEnd(&head, 30);
+
+//     insertBeginning(&head, 5);
+
+//     display(head);
+
+//     deleteBeginning(&head);
+
+//     deleteEnd(&head);
+
+//     display(head);
+
+// }
+
+
+//________________________________________________________________________________________________________________________
+
+// Node* head;                              
+// head          → address of first Node
+// *head         → first Node
+// head->data    → data of first Node
+// head->next    → address of second Node
+
+
+// Node** p = &head;
+// p             → address of head
+// *p            → head
+// **p           → first Node
+// (*p)->data    → data of first Node
+// (*p)->next    → second Node's address
+
+// Node*& p = head  
+// here p is alice of head(means another name of head)
+// when u do p = p->next this will change head also (head = head->next) 
+// it's like same person with different name
+
+// Node* p = head
+// here p is completly separate new node which is pointing to the node where head is pointing 
+
+
+//________________________________________________________________________________________________________________________
+
+// ! IMPORTANT:
+// In array-based Stack and Queue, pop() and dequeue()
+// do not physically delete elements from the array.
+// They only update the index (top/front).
+// The old values remain in memory until overwritten.
+
+//________________________________________________________________________________________________________________________
+
+// Stack (FILO)
+
+//________________________________________________________________________________________________________________________
+
+
+// stack using Array
+
+
+// class Stack{
+// private:
+//     int size;
+//     int top;
+//     int* S; // S is pointer to int 
+
+// public:
+//     Stack(int size); // constructor 
+//     ~Stack(); // destructor
+
+//     void push(int x);
+//     int pop();
+//     int peek(int index);
+//     int isFull();
+//     int isEmpty();
+//     void display();
+//     int stackTop();
+
+// };
+ 
+// // Defining the functions that belong to Stack class
+
+// Stack::Stack(int size) { // '::' is called the scope resolution operator
+//     // Stack::Stack -> means that the Stack function that belongs to the Stack class
+
+//     this->size = size;
+//     top = -1;
+//     S = new int[size]; // this is array of int created in heap memory 
+
+// }
+ 
+// Stack::~Stack() { // distructor runs when main() completes 
+//     delete[] S;
+// }
+ 
+// void Stack::push(int x) {
+//     if (isFull()){
+//         cout << "Stack Overflow!" << endl;
+//     } else {
+//         top++;
+//         S[top] = x;
+//     }
+// }
+ 
+// int Stack::pop() {
+//     int x;
+//     if (isEmpty()){
+//         cout << "Stack Underflow!" << endl;
+//     } else {
+//         x = S[top];
+//         top--;
+//     }
+//     return x;
+// }
+ 
+// int Stack::peek(int pos) {
+//     int x = -1;
+//     if (top-pos+1 < 0 || top-pos+1 == size){
+//         cout << "Invalid position!" << endl;
+//     } else {
+//         x = S[top-pos+1];
+//     }
+//     return x;
+// }
+ 
+// int Stack::isFull() {
+//     if (top == size-1){
+//         return 1;
+//     }
+//     return 0;
+// }
+ 
+// int Stack::isEmpty() {
+//     if (top == -1){
+//         return 1;
+//     }
+//     return 0;
+// }
+ 
+// void Stack::display() {
+//     for (int i=top; i>=0; i--){
+//         cout << S[i] << " | " << flush;
+//     }
+//     cout << endl;
+// }
+ 
+// int Stack::stackTop() {
+//     if (isEmpty()){
+//         return -1;
+//     }
+//     return S[top];
+// }
+ 
+ 
+// int main(){
+ 
+//     int A[] = {1, 3, 5, 7, 9};
+ 
+//     Stack stk(sizeof(A)/sizeof(A[0]));
+ 
+//     // Populate stack with array elements
+//     for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+//         stk.push(A[i]);
+//     }
+//     stk.push(11);
+ 
+//     cout << "Stack full: " << stk.isFull() << endl;
+ 
+//     // Display stack;
+//     cout << "Stack: " << flush;
+//     stk.display();
+ 
+//     // Peek
+//     cout << "Peek at 0th: " << stk.peek(0) << endl;
+//     cout << "Peek at 3rd: " << stk.peek(3) << endl;
+//     cout << "Peek at 10th: " << stk.peek(10) << endl;
+ 
+//     // Top element
+//     cout << "Top element: " << stk.stackTop() << endl;
+ 
+//     // Pop out elements from stack
+//     cout << "Popped out elements: " << flush;
+//     for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+//         cout << stk.pop() << ", " << flush;
+//     }
+//     cout << endl;
+//     stk.pop();
+ 
+//     cout << "Stack empty: " << stk.isEmpty() << endl;
+ 
+//     return 0;
+
+// } // stack is destroyed HERE as ~Stack(distructor runs when cursor reaches here )
+
+//________________________________________________________________________________________________________________________
+
+//  Stack using linked list 
+
+// class Node{
+// public:
+//     int data;
+//     Node* next;
+// };
+ 
+
+// class Stack{
+// private:
+//     Node* top;
+// public:
+//     Stack();
+//     ~Stack();
+//     void push(int x);
+//     int pop();
+//     int peek(int index);
+//     int isEmpty();
+//     int isFull();
+//     int stackTop();
+// };
+
+ 
+// Stack::Stack() {
+//     top = nullptr;
+// }
+
+ 
+// Stack::~Stack() {
+//     Node* p = top;
+//     while (top){
+//         top = top->next;
+//         delete p;
+//         p = top;
+//     }
+// }
+ 
+
+// void Stack::push(int x) {
+//     Node* t = new Node;
+//     if (t == nullptr){
+//         cout << "Stack Overflow!" << endl;
+//     } else {
+//         t->data = x;
+//         t->next = top;
+//         top = t;
+//     }
+// }
+
+ 
+// int Stack::pop() {
+//     Node* p;
+//     int x = -1;
+//     if (top == nullptr){
+//         cout << "Stack Underflow!" << endl;
+//     } else {
+//         p = top;
+//         x = p->data;
+//         top = top->next;
+//         delete p;
+//     }
+//     return x;
+// }
+ 
+// int Stack::isFull() {
+//     Node* t = new Node;
+//     int r = t ? 1 : 0;
+//     delete t;
+//     return r;
+// }
+ 
+// int Stack::isEmpty() {
+//     return top ? 0 : 1;
+// }
+ 
+// int Stack::stackTop() {
+//     if (top){
+//         return top->data;
+//     }
+//     return -1;
+// }
+ 
+// int Stack::peek(int index) {
+//     if (isEmpty()){
+//         return -1;
+//     } else {
+//         Node* p = top;
+ 
+//         for (int i=0; p != nullptr && i<index-1; i++){
+//             p = p->next;
+//         }
+ 
+//         if (p != nullptr){
+//             return p->data;
+//         } else {
+//             return -1;
+//         }
+//     }
+// }
+ 
+// int main() {
+ 
+//     int A[] = {1, 3, 5, 7, 9};
+ 
+//     Stack stk;
+ 
+//     // Populate stack
+//     for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+//         stk.push(A[i]);
+//     }
+ 
+//     cout << "Stack peek at 3rd: " << stk.peek(3) << endl;
+//     cout << "Stack peek at 10th: " << stk.peek(10) << endl;
+//     cout << "Stack top: " << stk.stackTop() << endl;
+//     cout << "Stack full: " << stk.isFull() << endl;
+//     cout << "Stack empty: " << stk.isEmpty() << endl;
+ 
+//     // Pop out elements from stack
+//     cout << "Popped: " << flush;
+//     for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+//         cout << stk.pop() << ", " << flush;
+//     }
+//     cout << endl;
+ 
+//     // Underflow
+//     cout << stk.pop() << endl;
+ 
+//     return 0;
+// }
+
+//________________________________________________________________________________________________________________________
+
+// Queue (FIFO)
+
+//________________________________________________________________________________________________________________________
+
+
+struct Queue{
+
+    int size;
+    int front;
+    int rear;
+    int *Q;
+    
 };
 
 
-// Creating Linked List
-Node* Create_LL(){
+void create(struct Queue *q,int size){
 
-    int n;
-    cout<<"Enter no:of elements :";
-    cin>>n;
-
-    int A[n];
-    cout<<"Enter elements :";
-    for (int i =0;i<n;i++){
-        cin>>A[i];
-    }
-
-    // Create first node
-    Node* head = new Node;
-
-    Node* temp;
-    Node* last;
-
-    head->data = A[0];
-    head->next = nullptr;
-
-    last = head;
-
-    // Create remaining nodes
-    for (int i = 1; i < sizeof(A) / sizeof(A[0]); i++) {
-
-        temp = new Node;
-
-        temp->data = A[i];
-        temp->next = nullptr;
-
-        last->next = temp;
-        last = temp;
-    }
-
-    return head;
+    q->size=size;
+    q->front=q->rear=-1;
+    q->Q=(int *)malloc(q->size*sizeof(int));
 }
 
 
+void enqueue(struct Queue *q,int x){ //push
 
-// Displaying Linked List 
-void Display(Node *p){
-
-    // Display linked list val without address
-
-    // Node* p = head;
-    // while (p != nullptr) {
-    //     cout << p->data << " -> ";
-    //     p = p->next;
-    // }
-    // cout << "NULL";
-
-
-    // display the val with address
-
-    if (p!=NULL){
-        printf("|%d|%p|\n",p->data,p);
-        printf("       |        \n");
-        printf("       V        \n");
-        Display(p->next);
+    if(q->rear==q->size-1){
+        printf("Queue is Full");
     }
     else{
-        printf("       NULL        \n");
-    }
-}
-
-
-// Count (Size) also we can count while sum but Sum is a method i can't do it eveytime(logically)
-int Count(Node *p){
-
-    int count = 0;
-
-    while(p!= nullptr){
-        count++;
-        p = p->next;
+        q->rear++;
+        q->Q[q->rear]=x;
     }
 
-    return count;
 }
 
+int dequeue(struct Queue *q){ //pop
 
-
-// Sum of all the elements 
-int Sum(Node* p){
-
-    int sum = 0;
-    while(p!=nullptr){
-        sum+=p->data;
-        p = p->next;
+    int x=-1;
+    if(q->front==q->rear){
+        printf("Queue is Empty\n");
+    }else{
+        q->front++;
+        x=q->Q[q->front];
     }
-
-    return sum;
+    return x;
 }
 
-
-// MAX
-int Max_num(Node* p){
-
+void Display(struct Queue q){
     
-    int n = Count(p);
-    int max = p->data;
-    
-    for (int i = 1;i<n;i++){
-        p = p->next;
-        if (p->data > max){
-            max = p->data;
-        }
-    }
-
-    return max;
+    for(int i =  q.front+1;i<=q.rear;i++)
+    printf("%d ",q.Q[i]);
+    printf("\n");
 }
-
-
-// Second max
-int Sec_max(Node* p){
-
-    int sec_max = INT_MIN;
-    int maxx = Max_num(p);
-
-    int n = Count(p);
-
-    for (int i = 0;i<n;i++){
-        if (p->data < maxx && p->data > sec_max){
-            sec_max = p->data;
-        }
-        p = p->next;
-    }
-
-
-    return sec_max;
-}
-
-
-// Min 
-int Min_num(Node* p){
-
-    int min = p->data;
-    int n = Count(p);
-
-    for (int i =1;i<n;i++){
-        p=p->next;
-        if(p->data <min){
-            min = p->data;
-        }
-    }
-
-    return min;
-
-}
-
-
-// Search element in LL (linaer search)
-int Search(Node* p){
-
-    int Target;
-    cout<<"Enter a element to find :";
-    cin>>Target;
-
-    int n = Count(p);
-
-    // linear search
-
-    for (int i = 0;i<n;i++){
-        if (p->data == Target){
-            return i;
-        }
-
-        p = p->next;
-    }
-
-    return -1;
-
-}
-
-// Improvement in linear search
-
-// Move to Head
-// Transposition
-
-
-// Insertion in LL
-void Insert_ele(Node* p){
-
-    int i,e;
-    cout << "Enter element  to insert :";
-    cin>>e;
-    cout << "Enter index :";
-    cin>>i;
-
-    if (i > 0 && i >Count(p)){
-        cout << "Invalid index";
-        return;       
-    }
-
-    Node* dummy = new Node;
-    dummy->data = 0;
-    dummy->next = p;
-
-    p = dummy;
-
-    Node* t = new Node;
-    t->data = e;
-    t->next = nullptr;
-
-
-    for (int j =0;j<i;j++){
-        p = p->next;
-    }
-
-    t->next = p->next;// see p->next doesn't mean p = p->next 
-    p->next = t;    // p and p->next are two different things
-
-    Display(dummy->next);
-}
-
-
-// Insert in sorted LL
-
-void InsertSort(Node *p){
-
-    int e;
-    cout << "Enter element  to insert :";
-    cin>>e;
-
-    Node* dummy = new Node;
-    dummy->data = INT_MIN;
-    dummy->next = p;
-
-    p = dummy;
-
-    Node* t = new Node;
-    t->data = e;
-    t->next = nullptr;
-
-
-    while(p->next != nullptr && p->next->data <e){
-        p = p->next;
-    }
-
-    t->next = p->next;
-    p->next= t;
-
-    Display(dummy->next);
-}
-
-
-// Deleting element from LL
-
-void Delete_ele(Node *p){
-
-    int e;
-    cout << "Which element you want to delete :";
-    cin >> e;
-
-    Node *t = new Node;
-    t->data = 0;
-    t->next = p;
-    p = t;
-
-    while (1){
-        if (p->next == nullptr){
-            cout << "404! element is not found";
-            return;
-        }
-        if (p->next->data != e){
-            p=p->next;
-        }
-        else{
-            p->next = p->next->next;
-            Display(t->next);
-            printf("Element Deleted successfully \n");
-            return;
-        }
-    }    
-}
-
-int Check_sorted(Node *p){
-
-    int Sorted = 1;
-
-    while(Sorted && p->next != nullptr){
-        if(p->data < p->next->data){
-            p = p->next;
-        }
-        else{
-            cout<<"please enter sorted elements\n";
-            
-            return 0;
-        }
-    }
-
-    cout<< "This is a Sorted LL!\n";
-    return 1;
-
-}
-
-
-void Remove_dup(Node *p){
-
-    unordered_set<int> seen; // Using set for set operator like find
-
-    Node* q = p;
-    Node* prev = nullptr;
-
-    while (q != nullptr)
-    {
-        if (seen.find(q->data) != seen.end()) // if element is not found find() return seen.end()
-        {
-            // duplicate found
-            prev->next = q->next;
-            delete q;
-            q = prev->next;
-        }
-        else
-        {
-            seen.insert(q->data);
-            prev = q;
-            q = q->next;
-        }
-    }
-
-    Display(p);
-}
-
-
-
-// Reversing Linked List
-void Reverse(Node *p){
-
-    Node* q = nullptr;
-    Node* r = nullptr;
-
-    while (p != nullptr)
-    {
-        r = q;
-        q = p;
-        p = p->next;
-        q->next = r;
-    }
-
-
-    Display(q);
-    
-}
-
-
-// Concatentation of LL 
-void Concat(Node *p){
-
-    Node *r = p;
-
-    cout<<"\nEnter info of ur second LL\n";
-    Node *q = Create_LL();
-
-    while(p->next != nullptr){
-        p = p->next;
-    }
-
-    p->next = q;
-
-    Display(r);
-
-
-}
-
-
-// Merge Linked List
-void Merge(Node *p){
-
-    if(!Check_sorted(p)){
-        return;
-    }
-
-    Node *r = p;
-
-    cout<<"\nEnter info of ur second LL\n";
-    Node *q = Create_LL();
-
-    if (!Check_sorted(q)){
-        return;
-    }
-
-
-    int i = Count(p),j = Count(q),x=0,y=0;
-
-    while(x<i && y<j){
-
-        if (p->next==nullptr){
-            break;
-        }
-
-        if(p->data<q->data  && p->next->data > q->data){
-
-            Node *temp = new Node;
-            temp->data = q->data;
-
-            temp->next = p->next;
-
-            p->next = temp;
-            p=p->next->next;
-            q = q->next;
-            y++;
-            x++;
-        }
-        else if (p->data>q->data){
-            Node *temp = new Node;
-            temp->data = p->data; 
-            temp->next = p->next;
-            p->data = q->data;
-            p->next = temp;
-
-            p=p->next;
-            q=q->next;
-            y++;
-            x++;
-        }
-        else{
-            p = p->next;
-            x++;
-
-        }
-    }
-
-    if (y<j){
-        p->next = q;
-    }
-
-
-    Display(r);
-
-}
-
 
 int main(){
 
-    Node* head = Create_LL();
+    struct Queue q;
+    create(&q,5);
 
-    // Display(head);
-    
-    // cout <<"Size of your linked list :"<<Count(head)<<endl;
-    
-    // cout<<"Sum of all elements is :"<<Sum(head)<<endl;
-    
-    // cout<<"Max num is :"<<Max_num(head)<<endl;
-    
-    // cout << "Second Max is :"<<Sec_max(head)<<endl;
-    
-    // cout <<"Min value is :"<<Min_num(head);
-    
-    // cout << Search(head);
-    
-    // Insert_ele(head);
-    
-    // InsertSort(head);
+    enqueue(&q,10);
+    enqueue(&q,20);
+    enqueue(&q,30);
+    Display(q);
 
-    // Delete_ele(head);
+    printf("%d ",dequeue(&q));
+    return 0;
+}
 
-    // Check_sorted(head);
 
-    // Remove_dup(head);
+// Circular queue
 
-    // Reverse(head);
-
-    // Concat(head); // Concatenation is just adding the second LL to first no need to check order
-
-    Merge(head);
-
+class CircularQueue{
+private:
+    int size;
+    int front;
+    int rear;
+    int* Q;
+public:
+    CircularQueue(int size);
+    ~CircularQueue();
+    bool isFull();
+    bool isEmpty();
+    void enqueue(int x);
+    int dequeue();
+    void display();
+};
+ 
+CircularQueue::CircularQueue(int size) {
+    this->size = size;
+    front = 0;
+    rear = 0;
+    Q = new int [size];
+}
+ 
+CircularQueue::~CircularQueue() {
+    delete [] Q;
+}
+ 
+bool CircularQueue::isEmpty() {
+    if (front == rear){
+        return true;
+    }
+    return false;
+}
+ 
+bool CircularQueue::isFull() {
+    if ((rear + 1) % size == front){
+        return true;
+    }
+    return false;
+}
+ 
+void CircularQueue::enqueue(int x) {
+    if (isFull()){
+        cout << "Queue Overflow" << endl;
+    } else {
+        rear = (rear + 1) % size;
+        Q[rear] = x;
+    }
+}
+ 
+int CircularQueue::dequeue() {
+    int x = -1;
+    if (isEmpty()){
+        cout << "Queue Underflow" << endl;
+    } else {
+        front = (front + 1) % size;
+        x = Q[front];
+    }
+    return x;
+}
+ 
+void CircularQueue::display() {
+    int i = front + 1;
+    do {
+        cout << Q[i] << flush;
+        if (i < rear) {
+            cout << " <- " << flush;
+        }
+        i = (i + 1) % size;
+    } while (i != (rear + 1) % size);
+}
+ 
+ 
+int main() {
+ 
+    int A[] = {1, 3, 5, 7, 9};
+ 
+    CircularQueue cq(sizeof(A)/sizeof(A[0]) + 1);
+ 
+    // Enqueue
+    for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+        cq.enqueue(A[i]);
+    }
+ 
+    // Display
+    cq.display();
+    cout << endl;
+ 
+    // Overflow
+    cq.enqueue(10);
+ 
+    // Dequeue
+    for (int i=0; i<sizeof(A)/sizeof(A[0]); i++){
+        cq.dequeue();
+    }
+ 
+    // Underflow
+    cq.dequeue();
+ 
+    return 0;
 }
 
 //________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
